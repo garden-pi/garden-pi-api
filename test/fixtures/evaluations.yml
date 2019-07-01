@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number_fruit: 1
+  height: 1.5
+  overall_health: 1
+  notes: MyText
+  plant: one
+
+two:
+  number_fruit: 1
+  height: 1.5
+  overall_health: 1
+  notes: MyText
+  plant: two

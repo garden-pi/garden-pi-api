@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ph: 1.5
+  moisture: 1.5
+  hours_sunlight: 1.5
+  average_temperature: 1.5
+  height: 1.5
+  number_fruit: 1
+
+two:
+  ph: 1.5
+  moisture: 1.5
+  hours_sunlight: 1.5
+  average_temperature: 1.5
+  height: 1.5
+  number_fruit: 1
