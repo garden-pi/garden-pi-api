@@ -7,6 +7,8 @@ class CreateSpecies < ActiveRecord::Migration[5.2]
       t.float :ph_max
       t.float :soil_moisture_min
       t.float :soil_moisture_max
+      t.float :humidity_min
+      t.float :humidity_max
       t.string :common_name
       t.string :moisture_use
       t.float :temperature_min

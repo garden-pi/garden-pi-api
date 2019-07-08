@@ -10,14 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_30_235854) do
+ActiveRecord::Schema.define(version: 2019_07_08_170051) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "actions", force: :cascade do |t|
+    t.string "action_type"
+    t.string "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "evaluations", force: :cascade do |t|
     t.integer "number_fruit"
     t.float "height"
     t.integer "overall_health"
     t.text "notes"
-    t.integer "plant_id"
+    t.bigint "plant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["plant_id"], name: "index_evaluations_on_plant_id"
@@ -25,15 +35,25 @@ ActiveRecord::Schema.define(version: 2019_06_30_235854) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
+  create_table "logs", force: :cascade do |t|
+    t.bigint "action_id"
+    t.bigint "plant_id"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action_id"], name: "index_logs_on_action_id"
+    t.index ["plant_id"], name: "index_logs_on_plant_id"
+  end
+
   create_table "plants", force: :cascade do |t|
-    t.integer "species_id"
-    t.integer "group_id"
+    t.bigint "species_id"
+    t.bigint "group_id"
     t.string "name"
     t.float "ph_min"
     t.float "ph_max"
@@ -55,6 +75,8 @@ ActiveRecord::Schema.define(version: 2019_06_30_235854) do
     t.float "ph_max"
     t.float "soil_moisture_min"
     t.float "soil_moisture_max"
+    t.float "humidity_min"
+    t.float "humidity_max"
     t.string "common_name"
     t.string "moisture_use"
     t.float "temperature_min"
@@ -70,4 +92,10 @@ ActiveRecord::Schema.define(version: 2019_06_30_235854) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "evaluations", "plants"
+  add_foreign_key "groups", "users"
+  add_foreign_key "logs", "actions"
+  add_foreign_key "logs", "plants"
+  add_foreign_key "plants", "groups"
+  add_foreign_key "plants", "species"
 end
