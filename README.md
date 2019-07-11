@@ -1,24 +1,67 @@
-# README
+Garden Pi API
+===============
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+# Overview
 
-* Ruby version
+This repository holds the API for the Garden Pi project. 
 
-* System dependencies
+# Setup 
 
-* Configuration
+To setup, please run the following commands:
 
-* Database creation
+`bundle install`
+`rails db:setup`
 
-* Database initialization
+Then add an `.env` file to the root of this directory with the following keys:
 
-* How to run the test suite
+```
+APP_SECRET=<insert app secret>
+TREFLE_API_KEY=<insert Trefle API key>
+```
+Finally, you can start the server with:
+`rails s`
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+# Endpoints
 
-* ...
+All authorized routes require an `Authorization` header containing the word "Bearer" followed by a valid JWT token. Example:
+```
+{
+  Authorization: "Bearer your-token-goes-here"
+}
+```
+
+## Auth
+
+### POST `/api/v1/login`
+- Params: email, password
+- Authorized: No
+- Response: { user: object, jwt: string }
+
+## Users
+
+### POST `/api/v1/users`
+- Params: email, password, name
+- Authorized: No
+- Response: { user: object, jwt: string }
+
+### GET `/api/v1/profile`
+- Query Params: N/A
+- Authorized: Yes
+- Response: { user: object }
+
+## Species
+
+### GET `/api/v1/species`
+- Query Params: 
+  - `term` - used to do a search by name (common and scientific) in both Trefle API and this API
+- Authorized: No
+- Response: { species: array }
+
+
+
+# Supporting Documentation
+
+[Domain model]()
+

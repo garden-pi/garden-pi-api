@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_170051) do
+ActiveRecord::Schema.define(version: 2019_07_08_181619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,9 @@ ActiveRecord::Schema.define(version: 2019_07_08_170051) do
     t.float "temperature_min"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "precipitation_min"
+    t.float "precipitation_max"
+    t.float "root_depth_min"
   end
 
   create_table "users", force: :cascade do |t|

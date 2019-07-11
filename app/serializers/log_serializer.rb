@@ -1,5 +1,3 @@
 class LogSerializer < ActiveModel::Serializer
-  attributes :id
-  has_one :action
-  has_one :plant
+  attributes :id, :amount, :action_id
 end
