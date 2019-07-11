@@ -62,3 +62,20 @@ end
 puts "Finished creating plants"
 
 
+puts "Creating actions..."
+
+actions = [
+  {action_type: "Water", unit: "liter"},
+  {action_type: "Prune" },
+  {action_type: "Harvest" },
+  {action_type: "Sun" },
+  {action_type: "Shade" },
+  {action_type: "Fertilize"},
+  {action_type: "Weed" },
+  {action_type: "Transplant" },
+  {action_type: "Deadhead" }.
+  {action_type: "Mulch" }
+]
+
+puts "Finished creating actions"
+
