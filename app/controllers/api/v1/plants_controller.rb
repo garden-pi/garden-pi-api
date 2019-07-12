@@ -1,5 +1,14 @@
 class Api::V1::PlantsController < ApplicationController
-  before_action :authorized, [:create, :update]
+  before_action :authorized, only: [:create, :update, :show]
+
+  def show
+    plant = Plant.find_by(id: params[:id])
+    if plant
+      render json: plant
+    else
+      render json: {}, status: :not_found
+    end
+  end
 
   def create
     plant = Plant.new(plant_params)

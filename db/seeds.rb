@@ -59,6 +59,21 @@ Group.all.each do |group|
     )
   end
 end
+
+# for AWS test
+Plant.create(
+  group: Group.first,
+  species: Species.all.sample,
+  name: "iot_test2",
+  ph_min: generate_random_float(7),
+  ph_max: generate_random_float(14),
+  soil_moisture_min: generate_random_float(5),
+  soil_moisture_max: generate_random_float(20),
+  humidity_min: generate_random_float(20),
+  humidity_max: generate_random_float(80),
+  temperature_min: generate_random_float(55),
+  logging_enabled: true
+)
 puts "Finished creating plants"
 
 

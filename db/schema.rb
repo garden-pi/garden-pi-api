@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_181619) do
+ActiveRecord::Schema.define(version: 2019_07_12_174640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2019_07_08_181619) do
     t.float "temperature_min"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "logging_enabled", default: false
     t.index ["group_id"], name: "index_plants_on_group_id"
     t.index ["species_id"], name: "index_plants_on_species_id"
   end
