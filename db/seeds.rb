@@ -73,7 +73,7 @@ actions = [
   {action_type: "Fertilize"},
   {action_type: "Weed" },
   {action_type: "Transplant" },
-  {action_type: "Deadhead" }.
+  {action_type: "Deadhead" },
   {action_type: "Mulch" }
 ]
 
