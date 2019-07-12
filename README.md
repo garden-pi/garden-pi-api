@@ -37,19 +37,19 @@ All authorized routes require an `Authorization` header containing the word "Bea
 ### POST `/api/v1/login`
 - Params: email, password
 - Authorized: No
-- Response: { user: object, jwt: string }
+- Response: { user: {}, jwt: "" }
 
 ## Users
 
 ### POST `/api/v1/users`
 - Params: email, password, name
 - Authorized: No
-- Response: { user: object, jwt: string }
+- Response: { user: {}, jwt: "" }
 
 ### GET `/api/v1/profile`
 - Query Params: N/A
 - Authorized: Yes
-- Response: { user: object }
+- Response: { user: {} }
 
 ## Species
 
@@ -57,9 +57,46 @@ All authorized routes require an `Authorization` header containing the word "Bea
 - Query Params: 
   - `term` - used to do a search by name (common and scientific) in both Trefle API and this API
 - Authorized: No
-- Response: { species: array }
+- Response: { species: [] }
 
+## Plants
 
+### POST `/api/v1/plants`
+- Required Params:
+  - {
+      species_id, 
+      group_id, 
+    }
+- Permitted Params:
+  - {
+      name, 
+      ph_min, 
+      ph_max, 
+      soil_moisture_min, 
+      soil_moisture_max, 
+      humidity_min, 
+      humidity_max, 
+      temperature_min
+    }
+- Authorized: Yes
+- Response: { plant: {}}
+
+### PATCH `/api/v1/plants/:id`
+- Permitted Params:
+  - {
+      species_id, 
+      group_id, 
+      name, 
+      ph_min, 
+      ph_max, 
+      soil_moisture_min, 
+      soil_moisture_max, 
+      humidity_min, 
+      humidity_max, 
+      temperature_min
+    }
+- Authorized: Yes
+- Response: { plant: {}}
 
 # Supporting Documentation
 

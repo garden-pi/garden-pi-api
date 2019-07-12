@@ -6,14 +6,14 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       token = encode_token(user_id: user.id)
 
-      render json: {user: UserSerializer.new(user), jwt: token }, status: :created
+      render json: {user: UserSerializer.new(user), jwt: token }, include: "*.*.*", status: :created
     else
       render json: {errors: user.errors.full_messages}, status: :not_acceptable
     end
   end
 
   def profile
-    render json: { user: UserSerializer.new(current_user) }, status: :accepted
+    render json: { user: UserSerializer.new(current_user) }, include: "*.*.*", status: :accepted
   end
 
   def show

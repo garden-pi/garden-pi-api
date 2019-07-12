@@ -1,4 +1,5 @@
 class Api::V1::PlantsController < ApplicationController
+  before_action :authorized, [:create, :update]
 
   def create
     plant = Plant.new(plant_params)
@@ -9,7 +10,7 @@ class Api::V1::PlantsController < ApplicationController
       render json: {errors: plant.errors.full_messages}
     end
   end
-  
+
   def update
 
     plant = Plant.find(params[:id])
