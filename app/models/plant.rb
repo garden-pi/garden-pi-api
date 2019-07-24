@@ -2,22 +2,26 @@ class Plant < ApplicationRecord
   belongs_to :species
   belongs_to :group
 
-  # has_many :logs
+  has_many :logs
   has_many :evaluations
 
-  def logs
-    if self.logging_enabled
+  def measurements
+    if logging_enabled
       # fetch from dynamo!
       dynamodb = Aws::DynamoDB::Client.new
       params = {
-          table_name: 'GardenPartyPi',
-          key: {
-              Plant: self.name
+          table_name: 'GardenParty',
+          key_condition_expression: "#plant = :plant",
+          expression_attribute_names: {
+            "#plant": "plant"
+          },
+          expression_attribute_values: {
+            ":plant": name
           }
       }
-      response = dynamodb.get_item(params)
+      response = dynamodb.query(params)
       if response
-        response["item"]["points"]
+        response["items"]
       end
     end
   end
