@@ -20,4 +20,10 @@ class Api::V1::SpeciesController < ApplicationController
       render json: Species.all
     end
   end
+
+  def show
+    species = Species.find(params[:id])
+
+    render json: species
+  end
 end
