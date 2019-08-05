@@ -12,10 +12,6 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def profile
-    render json: { user: UserSerializer.new(current_user) }, include: "*.*.*", status: :accepted
-  end
-
   def show
     render json: User.find(params[:id]), include: "*.*.*"
   end

@@ -10,4 +10,8 @@ class Api::V1::AuthController < ApplicationController
       render json: { message: 'Invalid email or password' }, status: :unauthorized
     end
   end
+
+  def auto_login
+    render json: { user: UserSerializer.new(current_user) }, include: "*.*.*", status: :accepted
+  end
 end

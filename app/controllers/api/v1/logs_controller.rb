@@ -1,5 +1,5 @@
 class Api::V1::LogsController < ApplicationController
-  before_action :authorized, only: [:create]
+  before_action :authorized, only: [:create, :update]
 
   def create
     log = Log.new(log_params)
