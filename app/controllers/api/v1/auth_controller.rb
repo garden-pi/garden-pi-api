@@ -1,4 +1,6 @@
 class Api::V1::AuthController < ApplicationController
+  before_action :authorized, only: [:auto_login]
+  
   def login
     user = User.find_by(email: params[:email])
 
@@ -12,6 +14,6 @@ class Api::V1::AuthController < ApplicationController
   end
 
   def auto_login
-    render json: { user: UserSerializer.new(current_user) }, include: "*.*.*", status: :accepted
+    render json: { user: UserSerializer.new(session) }, include: "*.*.*", status: :accepted
   end
 end
