@@ -1,18 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authorized, only: [:update]
-  def create
-    user = User.new(user_params)
-
-    if user.save
-      token = encode_token(user_id: user.id)
-
-      render json: {user: UserSerializer.new(user), jwt: token }, include: "*.*.*", status: :created
-    else
-      render json: {errors: user.errors.full_messages}, status: :not_acceptable
-    end
-  end
-
-  def update
+  before_action :authon    
     user = session_user
 
     user.assign_attributes(user_params)
@@ -28,7 +15,7 @@ class Api::V1::UsersController < ApplicationController
     render json: User.find(params[:id]), include: "*.*.*"
   end
   
-  private
+  private 
 
   def user_params
     params.permit(:email, :password, :name)

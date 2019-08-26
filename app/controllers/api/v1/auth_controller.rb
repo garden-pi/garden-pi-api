@@ -14,6 +14,6 @@ class Api::V1::AuthController < ApplicationController
   end
 
   def auto_login
-    render json: { user: UserSerializer.new(session) }, include: "*.*.*", status: :accepted
+    render json: { user: UserSerializer.new(session_user) }, include: "*.*.*", status: :accepted
   end
 end
