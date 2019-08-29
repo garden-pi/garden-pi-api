@@ -98,7 +98,7 @@ end
 Plant.create(
   group: Group.first,
   species: Species.all.sample,
-  name: "iot_test2",
+  name: "red_begonia_1",
   ph_min: generate_random_float(7),
   ph_max: generate_random_float(14),
   soil_moisture_min: generate_random_float(5),

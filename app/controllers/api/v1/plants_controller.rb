@@ -16,7 +16,7 @@ class Api::V1::PlantsController < ApplicationController
     if plant.save
       render json: plant
     else
-      render json: {errors: plant.errors.full_messages}
+      render json: {errors: plant.errors.full_messages}, status: :bad_request
     end
   end
 

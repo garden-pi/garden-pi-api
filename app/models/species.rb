@@ -32,4 +32,28 @@ class Species < ApplicationRecord
     
     new_species
   end
+
+  def self.create_from_trefle_id(id)
+    url = "https://trefle.io/api"
+    headers = {"Authorization": "Bearer #{ENV["TREFLE_API_KEY"]}"}
+
+    if (!Species.find_by(trefle_id: id))
+
+      res = RestClient.get(url + "/plants/#{id}", headers)
+
+      species_data = JSON.parse(res)
+
+      Species.create(
+        scientific_name: species_data["scientific_name"],
+        common_name: species_data["common_name"],
+        trefle_id: species_data["id"],
+        ph_min: species_data["main_species"]["growth"]["ph_minimum"],
+        ph_max: species_data["main_species"]["growth"]["ph_maximum"],
+        temperature_min: species_data["main_species"]["growth"]["temperature_minimum"]["deg_c"],
+        precipitation_min: species_data["main_species"]["growth"]["precipitation_minimum"]["cm"],
+        precipitation_max: species_data["main_species"]["growth"]["precipitation_maximum"]["cm"],
+        root_depth_min: species_data["main_species"]["growth"]["root_depth_minimum"]["cm"]
+      )
+    end
+  end
 end

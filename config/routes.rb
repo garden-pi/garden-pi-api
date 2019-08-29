@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       resources :species
       resources :plants
       resources :groups
+      
+      patch "/users/edit", to: "users#update"
       resources :users
 
       post "/login", to: "auth#login"

@@ -1,13 +1,12 @@
 class Api::V1::GroupsController < ApplicationController
-  before_action :authorized, only: [:create, :update]
+  before_action :authorized
 
   def index
-    render json: Group.all
-    
+    render json: @user.groups
   end
 
   def create
-    group = Group.new(group_params)
+    group = @user.groups.create(name: params[:name])
 
     if group.save
       render json: group
@@ -20,18 +19,12 @@ class Api::V1::GroupsController < ApplicationController
   def update
     group = Group.find(params[:id])
 
-    group.assign_attributes(group_params)
+    group.update(name: params[:name])
 
     if group.save
       render json: group
     else
       render json: {errors: group.errors.full_messages}
     end
-  end
-
-  private
-
-  def group_params
-    params.permit(:name, :user_id)
   end
 end
