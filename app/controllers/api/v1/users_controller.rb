@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authorized, only: [:update]
+  
   def create
     user = User.new(user_params)
 
@@ -26,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
     render json: User.find(params[:id]), include: "*.*.*"
   end
   
-  private
+  private 
 
   def user_params
     params.permit(:email, :password, :name)

@@ -2,8 +2,8 @@ class Plant < ApplicationRecord
   belongs_to :species
   belongs_to :group
 
-  has_many :logs
-  has_many :evaluations
+  has_many :logs, dependent: :destroy
+  has_many :evaluations, dependent: :destroy
 
   def measurements
     if logging_enabled

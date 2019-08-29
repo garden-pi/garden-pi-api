@@ -1,5 +1,5 @@
 class Api::V1::PlantsController < ApplicationController
-  before_action :authorized, only: [:create, :update, :show]
+  before_action :authorized, only: [:create, :update, :show, :destroy]
 
   def show
     plant = Plant.find_by(id: params[:id])
@@ -18,6 +18,14 @@ class Api::V1::PlantsController < ApplicationController
     else
       render json: {errors: plant.errors.full_messages}, status: :bad_request
     end
+  end
+
+  def destroy
+    plant = Plant.find(params[:id])
+
+    plant.destroy
+
+    render json: plant
   end
 
   def update
