@@ -11,14 +11,15 @@ class Plant < ApplicationRecord
       dynamodb = Aws::DynamoDB::Client.new
       params = {
           table_name: 'GardenParty',
-          key_condition_expression: "#plant = :plant AND #timestamp > :last_week",
+          key_condition_expression: "#plant = :plant AND #timestamp BETWEEN :start_time AND :end_time",
           expression_attribute_names: {
             "#plant": "plant",
             "#timestamp": "timestamp"
           },
           expression_attribute_values: {
             ":plant": name,
-            ":last_week": (Date.today - 30).to_time.to_i
+            ":start_time": (Date.today - 60).to_time.to_i,
+            ":end_time": (Date.today - 35).to_time.to_i
           }
       }
       response = dynamodb.query(params)
